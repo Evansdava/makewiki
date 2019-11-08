@@ -6,24 +6,22 @@ from django.views.generic.detail import DetailView
 
 class PageList(ListView):
     """
-    CHALLENGES:
-      1. On GET, display a homepage that shows all Pages in your wiki.
-      2. Replace this CHALLENGE text with a descriptive docstring for PageList.
-      3. Replace pass below with the code to render a template named list.html
+    Class to display a list of wiki pages
     """
 
     model = Page
 
     def get(self, request):
-        """ Returns a list of wiki pages."""
-        pass
+        """Returns a list of wiki pages."""
+        pages = self.get_queryset().all()
+        return render(request, 'list.html', {
+            'pages': pages
+        })
 
 
 class PageDetailView(DetailView):
     """
-    CHALLENGES:
-      1. On GET, render a template named `page.html`.
-      2. Replace this docstring with a description of what thos accomplishes.
+    Class to display a detailed view of a specific wiki page
 
     STRETCH CHALLENGES:
       1. Import the PageForm class from forms.py.
@@ -45,8 +43,11 @@ class PageDetailView(DetailView):
     model = Page
 
     def get(self, request, slug):
-        """ Returns a specific of wiki page by slug. """
-        pass
+        """Returns a specific of wiki page by slug."""
+        page = self.get_queryset().get(slug=slug)
+        return render(request, 'page.html', {
+            'page': page
+        })
 
     def post(self, request, slug):
         pass

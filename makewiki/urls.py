@@ -12,10 +12,11 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+
 """
+
 from django.contrib import admin
 from django.urls import path, include
-from wiki import views
 """
 CHALLENGES:
     1. Uncomment the path() for the wiki app below. Use it to direct any
@@ -23,12 +24,13 @@ CHALLENGES:
     Use the above docstring to guide you if you feel stuck.
     2. Make sure Django doesn't give you any warnings or errors when you
     execute `python manage.py runserver`.
+
 """
+
 urlpatterns = [
     # Admin Site
     path('admin/', admin.site.urls),
 
     # Wiki App
-    path('', views.home, name='home')
-    # path('REPLACE_ME_WITH_ROUTE', include(REPLACE_ME_WITH_APP_URLS)),
+    path('', include('wiki.urls')),
 ]
